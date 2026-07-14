@@ -1,0 +1,25 @@
+# yml的特点: yaml
+# 语法简单(xml) 键: 值 (如果有赋值操作, 必须带一个空格)
+# 缩进: 体现层级(一般为2个空格/ 4个空格)
+# 支持数据类型 (字符串、数字、bool、数组)
+sever:
+  part:8080
+
+spring:
+  datasource:
+    url: jdbc:mysql://118.31.38.158/smart_community?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: mppMPP050622@
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  mybatis-plus:
+    type-aliases-package: edu.xcc.smartcommunity.entity.pojo
+    mapper-locations: classpath*:mapper/**/*.xml
+    configuration:
+      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+      map-underscore-to-camel-case: true
+      return-instance-for-empty-row: true
+
+logging:
+  level:
+    edu.xcc.smartcommunity: debug

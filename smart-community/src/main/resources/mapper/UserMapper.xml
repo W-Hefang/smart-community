@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.xcc.smartcommunity.mapper.UserMapper">
+    <resultMap id="userMenuListResultMap" type="edu.xcc.smartcommunity.entity.vo.UserLoginVO">
+        <id column="user_id" property="userId" />
+        <result column="user_name" property="userName" />
+        <result column="user_phone" property="userPhone"/>
+        <result column="user_type" property="userType"/>
+        <result column="user_status" property="userStatus"/>
+        <collection property="menuList" ofType="edu.xcc.smartcommunity.entity.pojo.Menu" javaType="java.util.ArrayList">
+            <id column="menu_id" property="id" />
+            <result column="menu_name" property="name" />
+            <result column="menu_remark" property="remark"/>
+            <result column="menu_url" property="url"/>
+            <result column="menu_icon" property="icon"/>
+            <result column="pid" property="pid"/>
+        </collection>
+    </resultMap>
+
+    <select id="getMenuListByPhone" parameterType="string" resultMap="userMenuListResultMap">
+        SELECT *
+        FROM tb_user u
+        LEFT JOIN user_role ur ON u.user_id = ur.user_id
+        LEFT JOIN tb_role r ON ur.role_id = r.role_id
+        LEFT JOIN role_menu rm ON r.role_id = rm.role_id
+        LEFT JOIN tb_menu m ON rm.menu_id = m.menu_id
+        WHERE u.user_phone = #{phone}
+    </select>
+</mapper>

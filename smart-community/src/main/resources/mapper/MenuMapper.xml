@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.xcc.smartcommunity.mapper.MenuMapper">
+
+    <select id="selectMenusByRoleId" resultType="edu.xcc.smartcommunity.entity.pojo.Menu">
+        SELECT m.menu_id as id, m.menu_name as name, m.menu_remark as remark, 
+               m.menu_type as type, m.menu_url as url, m.menu_icon as icon, m.pid
+        FROM tb_menu m
+        JOIN role_menu rm ON m.menu_id = rm.menu_id
+        WHERE rm.role_id = #{roleId}
+        ORDER BY m.menu_id
+    </select>
+
+    <select id="selectAllMenus" resultType="edu.xcc.smartcommunity.entity.pojo.Menu">
+        SELECT menu_id as id, menu_name as name, menu_remark as remark, 
+               menu_type as type, menu_url as url, menu_icon as icon, pid
+        FROM tb_menu ORDER BY menu_id
+    </select>
+
+</mapper>
